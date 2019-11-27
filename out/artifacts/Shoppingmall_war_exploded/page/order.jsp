@@ -116,6 +116,7 @@
                     type: "post",
                     url: "/Useraddressweb?action=delete",
                     data: {udid: event.target.dataset['id']},
+                    dataType: "json",
                     success: function (data) {
                         console.log(data);
                         if (data.msg == "删除成功") {
@@ -146,6 +147,7 @@
                 type:"post",
                 url:"/OrderInformationweb?action=insert",
                 data:{address:$(".address:checked").val()},
+                dataType: "json",
                 success:function (data) {
                    if(data.msg=="ok"){
                        window.location.href="zhifu.jsp";
@@ -168,6 +170,7 @@
                 $.ajax({
                     type:"post",
                     url:"/Useraddressweb?action=insert",
+                    dataType: "json",
                     data:{
                         unameu:$("#unameu").val(),
                         uphoneu:$("#uphoneu").val(),
@@ -186,6 +189,7 @@
                 $.ajax({
                     type:"post",
                     url:"/Useraddressweb?action=update",
+                    dataType: "json",
                     data:{
                         udid:$("#add").val(),
                         unameu:$("#unameu").val(),

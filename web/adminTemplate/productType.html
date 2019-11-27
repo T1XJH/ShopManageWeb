@@ -84,6 +84,7 @@
                         type : "get",
                         url : "/ProductTypeweb?action=updatestatus",
                         async : true,
+                        dataType: "json",
                         data : {
                             "tid" : data.tid,
                             "status" : "未上架"
@@ -106,6 +107,7 @@
                         type : "get",
                         url : "/ProductTypeweb?action=updatestatus",
                         async : true,
+                        dataType: "json",
                         data : {
                             "tid" : data.tid,
                             "status" : "上架"
@@ -168,8 +170,8 @@
             $.ajax({
                 type:"get",
                 url:"/ProductTypeweb?action=gson",//请求路径
+                dataType: "json",
                 success:function(data){//请求成功后的事件
-                    data = JSON.parse(data);
                     $.each(data,function(index,obj){
                         var option=$("<option value='"+obj.tid+"'>"+obj.tname+"</option>");
                         $("#selecttype").append(option);
@@ -190,9 +192,10 @@
                         return;
                     }
                     $.ajax({
-                        type:"post"
-                        ,url:"/ProductTypeweb?action=insert"
-                        ,data:{
+                        type:"post",
+                        url:"/ProductTypeweb?action=insert",
+                        dataType: "json",
+                        data:{
                             tname:$("#pName").val(),
                             tstatus:$("#pstatus").prop("checked")?"上架":"未上架"
                         }

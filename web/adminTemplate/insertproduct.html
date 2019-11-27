@@ -80,8 +80,8 @@
     $.ajax({
         type:"get",
         url:"/ProductTypeweb?action=gson",//请求路径
+        dataType: "json",
         success:function(data){//请求成功后的事件
-            data = JSON.parse(data);
             $.each(data,function(index,obj){
                 var option=$("<option value='"+obj.tid+"'>"+obj.tname+"</option>");
                 $("#ptid").append(option);
@@ -148,7 +148,7 @@
                 },1000);
             }
             layer.msg(data.msg);
-        })
+        }, "json")
    })
     setTimeout(function () {
         var form=null;

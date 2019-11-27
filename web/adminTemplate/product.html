@@ -156,7 +156,7 @@
                             }
                             layer.msg(data.msg);
                             layer.close(index);
-                        })
+                        }, "json")
 
                     });
                 }  else if(obj.event === 'edit'){
@@ -209,7 +209,7 @@
                                         });
                                     }
                                     layer.msg(data.msg);
-                                })
+                                }, "json")
                         }
                         ,btn2: function(){
                             //关闭
@@ -222,6 +222,7 @@
                         type : "get",
                         url : "/Productweb?action=updatestatus",
                         async : true,
+                        dataType: "json",
                         data : {
                             "pid" : data.pid,
                             "pstatus" : "未上架"
@@ -259,7 +260,7 @@
                             }
                             layer.msg(data.msg);
                         }
-                    });
+                    }, "json");
                 }
             });
 
@@ -316,8 +317,8 @@
             $.ajax({
                 type:"get",
                 url:"/ProductTypeweb?action=gson",//请求路径
+                dataType: "json",
                 success:function(data){//请求成功后的事件
-                    data = JSON.parse(data);
                     $.each(data,function(index,obj){
                         var option=$("<option value='"+obj.tid+"'>"+obj.tname+"</option>");
                         $("#selecttype").append(option);

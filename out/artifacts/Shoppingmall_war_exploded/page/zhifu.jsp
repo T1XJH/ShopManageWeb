@@ -50,12 +50,13 @@
 <script>
     $("#zhifuok").click(function () {
         $.ajax({
-            type:"post",
-            url:"/OrderInformationweb?action=zhifu",
+            type: "post",
+            url: "/OrderInformationweb?action=zhifu",
+            dataType: "json",
             success:function (data) {
-                if(data.msg=="ok"){
+                if(data.msg == "ok"){
                     alert("支付成功");
-                    window.location.href="/OrderInformationweb?action=session"
+                    window.location.href="/OrderInformationweb?action=session";
                 }
                 else {
                     alert("支付失败");
