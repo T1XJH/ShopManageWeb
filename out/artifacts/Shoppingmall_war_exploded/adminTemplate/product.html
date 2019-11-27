@@ -245,6 +245,7 @@
                         type : "get",
                         url : "/Productweb?action=updatestatus",
                         async : true,
+                        dataType: "json",
                         data : {
                             "pid" : data.pid,
                             "pstatus" : "上架中"
@@ -260,7 +261,7 @@
                             }
                             layer.msg(data.msg);
                         }
-                    }, "json");
+                    });
                 }
             });
 
