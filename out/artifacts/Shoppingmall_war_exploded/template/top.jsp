@@ -38,7 +38,7 @@
                 $("<a style='color: blue'/>").html(data.msg).appendTo(p);
                 $("#dlzc").html(p).append($("<a href='/Usersweb?action=delete'>").html("注销"));
             }
-        })
+        }, 'json')
    }
     $(function () {
         dlzc();
@@ -55,6 +55,7 @@
         $.ajax({
             type:'post',
             url:'/ShoppingCartweb?action=session',
+            dataType: "json",
             success:function (data) {
                 if (data.msg == "no") {
                     alert("请登录！");
@@ -70,6 +71,7 @@
         $.ajax({
             type:'post',
             url:'/OrderInformationweb?action=session',
+            dataType: "json",
             success:function (data) {
                 if (data.msg == "no") {
                     alert("请登录！");
@@ -84,7 +86,7 @@
     function gwccount() {
         $.post("/ShoppingCartweb?action=count",function (data) {
             $("#gwccount").html(data.count)
-        })
+        }, "json")
     }
 </script>
 

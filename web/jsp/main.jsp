@@ -32,6 +32,7 @@
         $.ajax({
             type:'post',
             url:'/ShoppingCartweb?action=insert',
+            dataType: "json",
             data:{spid:event.target.dataset['id']},
             success:function (data) {
                 if(data.msg=="no"){

@@ -127,6 +127,7 @@
                 $.ajax({
                     type:"post",
                     url:"/Usersweb?action=password",
+                    dataType: "json",
                     data:{
                         uLName:$("#uLName").val(),
                         uLPwd:$("#uLPwd").val()
@@ -151,6 +152,7 @@
                 $.ajax({
                     type:"post",
                     url:"/Usersweb?action=insert",
+                    dataType: "json",
                     data:{
                         //账号
                         uLName:$("#account").val(),
