@@ -19,17 +19,17 @@
     </div>
 </div>
 <%
-    OrderInformation OrderInformation= (OrderInformation) session.getAttribute("zhifuOrderInformation");
+    OrderInformation OrderInformation = (OrderInformation) session.getAttribute("zhifuOrderInformation");
 %>
 <div class="row well well-sm box">
     <div class="col-md-4 column" style="text-align: center" align="left">
-        <p style="font-size: 20px;"><%=orderInformation.getOtime()%></p>
+        <p style="font-size: 20px;"><%= OrderInformation.getOtime() %></p>
     </div>
     <div class="col-md-4 column" align="center">
-        <p style="font-size: 20px;">订单号:<%=orderInformation.getOid()%></p>
+        <p style="font-size: 20px;">订单号:<%= OrderInformation.getOid() %></p>
     </div>
     <div class="col-md-4 column" align="left">
-        <p style="color: red; font-size: 20px">¥ <%=orderInformation.getOmoney()%></p>
+        <p style="color: red; font-size: 20px">¥ <%= OrderInformation.getOmoney() %></p>
     </div>
 </div>
 <div class="modal-body">
@@ -37,7 +37,6 @@
         <div class="col-md-12">
             <form class="form-horizontal" role="form">
                 <div class="form-group">
-                    <!--<label for="password" style="font-size: large;">密 码</label>-->
                     <input type="password" class="form-control" id="password" placeholder="密 码"/>
                     <button type="button" style="width: 100%;margin-top: 5%;" id="zhifuok"class="btn btn-primary">确认支付</button>
                 </div>
@@ -53,7 +52,7 @@
             type: "post",
             url: "/OrderInformationweb?action=zhifu",
             dataType: "json",
-            success:function (data) {
+            success: function (data) {
                 if(data.msg == "ok"){
                     alert("支付成功");
                     window.location.href="/OrderInformationweb?action=session";
