@@ -1,5 +1,6 @@
 <%@ page import="com.wbg.entity.OrderInformation" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,7 +29,9 @@
         <div class="col-md-2 column" align="center">操作</div>
     </div>
     <!-- 购物车列表 -->
-    <% for(OrderInformation OrderInformation : (List<OrderInformation>)session.getAttribute("OrderInformation")){ %>
+    <% List<OrderInformation> list = (List<OrderInformation>)session.getAttribute("OrderInformation");
+        list = list != null ? list : new ArrayList<OrderInformation>();
+        for(OrderInformation OrderInformation : list){ %>
     <div class="row well well-sm box">
         <div class="col-md-2 column" style="text-align: center" align="left">
             <p style="font-size: 12px;"><%=OrderInformation.getOtime()%></p>
