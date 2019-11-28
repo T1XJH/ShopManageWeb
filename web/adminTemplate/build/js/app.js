@@ -104,7 +104,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                 //             id: "7",
                 //             title: "表格",
                 //             icon: "&#xe6c6;",
-                //             url: "test.html"
+                //             url: ".html"
                 //         }, {
                 //             id: "8",
                 //             title: "表单",
@@ -160,7 +160,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                                                 id: "7",
                                                 title: "表格",
                                                 icon: "&#xe6c6;",
-                                                url: "test.html"
+                                                url: "t.html"
                                             }, {
                                                 id: "8",
                                                 title: "表单",
