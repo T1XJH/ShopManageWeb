@@ -1,10 +1,4 @@
-<%@ page import="com.wbg.entity.Users" %><%--
-  Created by IntelliJ IDEA.
-  User: 邦杠
-  Date: 2018/8/29
-  Time: 10:14
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.wbg.entity.Users" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row box" style="margin-top: 2rem; margin-bottom: 2rem;">
