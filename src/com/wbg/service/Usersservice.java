@@ -13,28 +13,28 @@ public class Usersservice {
     static UsersDao usersDao=new UsersDao();
     static R r=new R();
     public static void insert(HttpServletRequest request, HttpServletResponse response){
-           //账号
-           String uLName= request.getParameter("uLName");
-           //姓名
-           String uName= request.getParameter("uName");
-           //密码
-           String uLPwd= request.getParameter("uLPwd");
-             //手机号码
-           String uTel= request.getParameter("uTel");
-             //qq邮件
-           String uEmail= request.getParameter("uEmail");
-                 Users users= new Users();
-                 users.setuLName(uLName);
-                 users.setuLPwd(uLPwd);
-                users.setuEmail(uEmail);
-                 users.setuName(uName);
-                 users.setuTel(uTel);
-             users=usersDao.insert(users);
-             String msg="注册失败";
-            if(users!=null){
-                request.getSession().setAttribute("user",users);
-                msg="注册成功";
-            }
+        //账号
+        String uLName= request.getParameter("uLName");
+        //姓名
+        String uName= request.getParameter("uName");
+        //密码
+        String uLPwd= request.getParameter("uLPwd");
+        //手机号码
+        String uTel= request.getParameter("uTel");
+        //qq邮件
+        String uEmail= request.getParameter("uEmail");
+        Users users = new Users();
+        users.setuLName(uLName);
+        users.setuLPwd(uLPwd);
+        users.setuEmail(uEmail);
+        users.setuName(uName);
+        users.setuTel(uTel);
+        users=usersDao.insert(users);
+        String msg="注册失败";
+       if(users!=null){
+            request.getSession().setAttribute("user",users);
+            msg="注册成功";
+       }
         try {
             response.getWriter().print("{\"msg\":\""+msg+"\"}");
         } catch (IOException e) {
