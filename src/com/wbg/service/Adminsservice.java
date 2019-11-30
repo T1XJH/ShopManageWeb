@@ -8,23 +8,23 @@ import com.wbg.entity.Admins;
 import javax.servlet.http.HttpServletRequest;
 
 public class Adminsservice {
-    static  AdminsDao adminsDao=new AdminsDao();
-   static R r=new R();
+    static  AdminsDao adminsDao = new AdminsDao();
+    static R r = new R();
    //进行密码验证
     public static String pwd(HttpServletRequest request){
-        Admins admin=new Admins();
+        Admins admin = new Admins();
         admin.setAname(request.getParameter("aname"));
         admin.setAlpwd(request.getParameter("apwd"));
         if(adminsDao.pwd(admin)){
             r.setMsg("ok");
-            request.getSession().setAttribute("admins",admin);
+            request.getSession().setAttribute("admins", admin);
         }
         else
             r.setMsg("no");
         return DBUtil.toJson(r);
     }
     //查询全部数据
-    public  String finall(){
+    public String finall(){
         r.setCount(adminsDao.count());
         r.setData(adminsDao.finAll());
         return DBUtil.toJson(r);
@@ -44,6 +44,18 @@ public class Adminsservice {
         if(adminsDao.updastatus(uid,status))
             r.setMsg("修改成功");
         else r.setMsg("修改失败");
+        return DBUtil.toJson(r);
+    }
+    // 查询用户名
+    public static String findAdminName(HttpServletRequest request){
+        Admins admin = (Admins) request.getSession().getAttribute("admins");
+        if (admin != null){
+            r.setCode(1);
+            r.setMsg(admin.getAname());
+        } else{
+            r.setCode(0);
+            r.setMsg("");
+        }
         return DBUtil.toJson(r);
     }
 
