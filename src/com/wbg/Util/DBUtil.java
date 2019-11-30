@@ -1,6 +1,5 @@
 package	 com.wbg.Util;
 import java.io.IOException;
-import java.io.InputStream;
 import java.security.MessageDigest;
 import java.sql.*;
 import java.text.ParsePosition;
@@ -9,10 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
-import java.io.FileInputStream;
-import javax.sql.DataSource;
-import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,15 +23,17 @@ public class DBUtil {
     //查询（有参，无参）
     //修改（有参，无参）
     static Statement stmt = null;
-    public static DataSource ds = null;
-    public static Properties p = new Properties();
+    //驱动，服务器地址，登录用户名，密码
+    static String DBDRIVER="com.mysql.jdbc.Driver";
+    static String DBURL="jdbc:mysql://localhost:3306/shoppingmall";
+    static String DBUID="root";
+    static String DBPWD="xianjunhong@123";
     //打开连接
     static  {
         //加载驱动
         try {
-            FileInputStream in = new FileInputStream("C:\\Users\\ASUS\\Desktop\\Java\\ShopManageWeb\\resource\\db.properties");
-            p.load(in);
-        } catch (IOException e) {
+            Class.forName(DBDRIVER);
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -86,9 +83,8 @@ public class DBUtil {
     public static Connection getConnection() {
         Connection conn = null;
         try {
-            ds = DruidDataSourceFactory.createDataSource(p);
-            conn = ds.getConnection();
-        } catch (Exception e) {
+            conn=DriverManager.getConnection(DBURL,DBUID,DBPWD);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return conn;
