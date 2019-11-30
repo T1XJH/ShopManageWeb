@@ -1,5 +1,6 @@
 package com.wbg.web;
 
+import com.wbg.entity.Admins;
 import com.wbg.service.Adminsservice;
 
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +13,8 @@ public class Adminsweb extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        String actionn=request.getParameter("action");
-        switch (actionn){
+        String action = request.getParameter("action");
+        switch (action){
             //密码验证
             case "pwd":
                 response.getWriter().print(adminsservice.pwd(request));
@@ -33,6 +34,12 @@ public class Adminsweb extends javax.servlet.http.HttpServlet {
                 //修改状态
             case "updastatus":
                 response.getWriter().print(adminsservice.updastatus(Integer.parseInt(request.getParameter("uid")),request.getParameter("status")));
+                break;
+            case "admname":
+                response.getWriter().print(adminsservice.findAdminName(request));
+                break;
+            case "logout":
+                request.getSession().setAttribute("admins", null);
                 break;
 
         }

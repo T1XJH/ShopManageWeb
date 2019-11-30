@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ProductTypeservice {
-     static ProductTypeDao productTypeDao=new ProductTypeDao();
-     static R r=new R();
+    static ProductTypeDao productTypeDao=new ProductTypeDao();
+    static R r=new R();
     public static String finAllGson(){
         return new Gson().toJson(productTypeDao.finAll());
     }

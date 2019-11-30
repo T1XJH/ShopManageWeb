@@ -35,14 +35,14 @@
         </li>
         <li class="layui-nav-item">
           <a href="javascript:;">
-            <img src="" class="layui-nav-img"> Xianjh
+            <img src="" class="layui-nav-img"> <span id="admin_name"></span>
           </a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:;" kit-target data-options="{url:'basic.html',icon:'&#xe658;',title:'基本资料',id:'966'}"><span>基本资料</span></a></dd>
             <dd><a href="javascript:;">安全设置</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
+        <li class="layui-nav-item"><a href="login.html" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
       </ul>
     </div>
 
@@ -96,12 +96,28 @@
     <div class="layui-footer">
       <!-- 底部固定区域 -->
       2019 @
-      <a href="http://www.t1xjh.top">Xianjh/</a>
+      <a href="http://www.t1xjh.top">Xianjh</a>
     </div>
   </div>
 
   <script src="./plugins/layui/layui.js"></script>
+  <script src="plugins/layui/jquery-3.3.1.min.js"></script>
   <script>
+    $.get("/adminsweb?action=admname", function(data) {
+        if (data.code === 1) {
+          $("#admin_name").text(data.msg);
+        } else{
+          window.location.href = "login.html";
+        }
+    }, "json")
+
+    $("#logout").click(function () {
+      $.get("/adminsweb?action=logout", function() {
+        alert("退出登录");
+      })
+    })
+
+
     var message;
     layui.config({
       base: 'src/js/',
@@ -150,6 +166,7 @@
           switchSkin(skin === undefined ? 'default' : skin);
         }();
     });
+
   </script>
 </body>
 

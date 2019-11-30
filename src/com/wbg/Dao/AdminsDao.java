@@ -206,7 +206,7 @@ public class AdminsDao implements AdminsInterface {
     }
     public boolean pwd(Admins admins){
         String sql="select count(*) from admins where aname=? and alpwd=? and astatus='可用'";
-        Object[]in={admins.getAname(),admins.getAlpwd()};
+        Object[] in={admins.getAname(),admins.getAlpwd()};
         ResultSet rs=DBUtil.executeQuery(sql,in);
         try {
             if(rs.next()){
