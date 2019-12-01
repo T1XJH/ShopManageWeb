@@ -256,7 +256,7 @@ public class ProductTypeDao implements ProductTypeInterface {
     @Override
     public boolean delete(ProductType productType) {
         String sql="delete from productType where tid=?";
-        Object[]in={productType.getTid()};
+        Object[] in ={productType.getTid()};
         if(DBUtil.executeUpdate(sql,in)>0)
             return true;
         return false;

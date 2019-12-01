@@ -70,14 +70,66 @@
             table.on('tool(demo)', function(obj){
                 var data = obj.data;
                 if(obj.event === 'detail'){
-
+                    layer.alert('查看：<br>'+ JSON.stringify(data))
                 } else if(obj.event === 'del'){
                     layer.confirm('真的删除行么', function(index){
-                        del(data.studentid);
-                        layer.close(index);
+                        $.post("/ProductTypeweb?action=delete",{tid:data.tid},function (data) {
+                            if (data.msg == "删除成功") {
+                                //执行重载
+                                table.reload('idsw', {
+                                    page: {
+                                        curr: 1 //重新从第 1 页开始
+                                    }
+                                });
+                            }
+                            layer.msg(data.msg);
+                            layer.close(index);
+                        }, "json")
                     });
                 } else if(obj.event === 'edit'){
-                    layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                    $("#pName").val(data.tname);
+                    data.tstatus === "上架"?$("#pstatus").prop("checked",true):$("#nopstatus").prop("checked",true);
+                    form.render();
+                    layer.open({
+                        type:1
+                        ,content:$("#form")
+                        ,area:['550px','300px']
+                        ,btn: ['修改', '取消'] //只是为了演示
+                        ,yes: function(){
+                            if($("#pName").val()==""){
+                                layer.msg("类型名称不能为空");
+                                return;
+                            }
+                            $.ajax({
+                                type:"post",
+                                url:"/ProductTypeweb?action=update",
+                                dataType: "json",
+                                data:{
+                                    tid: data.tid,
+                                    tname:$("#pName").val(),
+                                    tstatus:$("#pstatus").prop("checked")?"上架":"未上架"
+                                }
+                                ,success:function(data){
+                                    if (data.msg == "修改成功") {
+                                        layer.closeAll();
+                                        $("#pName").val("");
+                                        //执行重载
+                                        table.reload('idsw', {
+                                            page: {
+                                                curr: 1 //重新从第 1 页开始
+                                            }
+                                        });
+                                    }
+                                    layer.msg(data.msg);
+                                }
+                            });
+                        }
+                        ,btn2: function(){
+                            //关闭
+                            layer.closeAll();
+                            empty();
+                        }
+                    });
                 }
                 else if(obj.event === 'shangjia'){
                     $.ajax({
@@ -226,8 +278,9 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详细</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn  layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 </body>
 <form class="layui-form"  id="form" hidden="hidden">
@@ -245,7 +298,7 @@
             <td>  <label class="layui-form-label">状态</label>
                 <div class="layui-input-block">
                     <input type="radio" name="sex" id="pstatus"  title="上架中" checked="">
-                    <input type="radio" name="sex"  title="未上架">
+                    <input type="radio" name="sex" id="nopstatus" title="未上架">
                 </div></td>
         </tr>
     </table>
