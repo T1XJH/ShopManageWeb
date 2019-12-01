@@ -65,7 +65,7 @@
       form.on('submit(login_hash)', function(data) {
           $.get("/adminsweb?action=pwd",{aname:$("#aname").val(),apwd:$("#apwd").val()},function (data) {
                   if(data.msg=="ok"){
-                      location.href='/admin';
+                      location.href='/adminTemplate/index.html';
                   }else {
                       alert("账号密码有误!")
                   }

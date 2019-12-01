@@ -42,7 +42,7 @@
             <dd><a href="javascript:;">安全设置</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="login.html" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
+        <li class="layui-nav-item"><a href="#" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
       </ul>
     </div>
 
@@ -103,21 +103,6 @@
   <script src="./plugins/layui/layui.js"></script>
   <script src="plugins/layui/jquery-3.3.1.min.js"></script>
   <script>
-    $.get("/adminsweb?action=admname", function(data) {
-        if (data.code === 1) {
-          $("#admin_name").text(data.msg);
-        } else{
-          window.location.href = "login.html";
-        }
-    }, "json")
-
-    $("#logout").click(function () {
-      $.get("/adminsweb?action=logout", function() {
-        alert("退出登录");
-      })
-    })
-
-
     var message;
     layui.config({
       base: 'src/js/',
@@ -166,6 +151,42 @@
           switchSkin(skin === undefined ? 'default' : skin);
         }();
     });
+
+    // $(window).load(function () {
+    //   // $.get("/adminsweb?action=admname", function(data) {
+    //   //   if (data.code === 1) {
+    //   //     $("#admin_name").text(data.msg);
+    //   //   } else{
+    //   //     window.location.href = "login.html";
+    //   //   }
+    //   // }, "json")
+    //
+    //   // $("#logout").click(function () {
+    //   //   $.get("/adminsweb?action=logout", function() {
+    //   //     alert("退出登录");
+    //   //   })
+    //   // })
+    // })
+
+    function getAdmName() {
+      $.get("/admin?action=admname", function (data) {
+        console.log(data)
+        if (data.code === 1) {
+          $("#admin_name").text(data.msg);
+        }
+      }, "json")
+    }
+
+    setTimeout("getAdmName()", 3000);
+
+    $("#logout").click(function () {
+      $.get("/adminsweb?action=logout", function() {
+      })
+      if (confirm("退出登录") === true){
+        window.location.href = "login.html";
+      }
+
+    })
 
   </script>
 </body>
