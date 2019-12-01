@@ -1,6 +1,8 @@
 package com.wbg.entity;
 
-public class ProductType {
+import java.io.Serializable;
+
+public class ProductType implements Serializable {
     int tid;
     String tname;
     String tstatus;

@@ -168,16 +168,16 @@
     //   // })
     // })
 
-    function getAdmName() {
-      $.get("/admin?action=admname", function (data) {
-        console.log(data)
-        if (data.code === 1) {
-          $("#admin_name").text(data.msg);
-        }
-      }, "json")
-    }
-
-    setTimeout("getAdmName()", 3000);
+    // function getAdmName() {
+    //   $.get("/admin?action=admname", function (data) {
+    //     console.log(data)
+    //     if (data.code === 1) {
+    //       $("#admin_name").text(data.msg);
+    //     }
+    //   }, "json")
+    // }
+    //
+    // setTimeout("getAdmName()", 3000);
 
     $("#logout").click(function () {
       $.get("/adminsweb?action=logout", function() {
