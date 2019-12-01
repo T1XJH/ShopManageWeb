@@ -34,29 +34,29 @@
         for(OrderInformation OrderInformation : list){ %>
     <div class="row well well-sm box">
         <div class="col-md-2 column" style="text-align: center" align="left">
-            <p style="font-size: 12px;"><%=OrderInformation.getOtime()%></p>
+            <p style="font-size: 12px;"><%= OrderInformation.getOtime() %></p>
             <img alt="80x80" width="60rem" height="50rem" src="https://g-search2.alicdn.com/img/bao/uploaded/i4/i1/263726286/TB2qqpCu2iSBuNkSnhJXXbDcpXa_!!263726286-0-item_pic.jpg_460x460Q90.jpg_.webp" />
         </div>
         <div class="col-md-3 column" align="left">
             <p>
-               <%=OrderInformation.getPname()%>
+               <%= OrderInformation.getPname() %>
             </p>
 
         </div>
         <div class="col-md-2 column" align="center">
             <p style="font-size: 12px;margin-top: -20px">订单号</p>
-            <p style="font-size: 12px;"><%=OrderInformation.getOid()%></p>
+            <p style="font-size: 12px;"><%= OrderInformation.getOid() %></p>
         </div>
         <div class="col-md-1 column" align="center">
-            <p style="font-size: 12px;"><%=OrderInformation.getUnameu()%></p>
+            <p style="font-size: 12px;"><%= OrderInformation.getUnameu() %></p>
         </div>
         <div class="col-md-2 column" align="center">
-            <p style="color: red; font-size: 13px">¥ <%=OrderInformation.getOmoney()%></p>
+            <p style="color: red; font-size: 13px">¥ <%= OrderInformation.getOmoney() %></p>
         </div>
         <div class="col-md-2 column" align="center">
             <%
                 if(OrderInformation.getOstatus().equals("未付款")){  %>
-            <a style="font-size: 15px;" href="/OrderInformationweb?action=ddzhifu&&oid=<%=OrderInformation.getOid()%>"><%=OrderInformation.getOstatus()%></a>
+            <a style="font-size: 15px;" href="/OrderInformationweb?action=ddzhifu&&oid=<%= OrderInformation.getOid() %>"><%= OrderInformation.getOstatus() %></a>
             <% }else{ %>
             <p style="font-size: 15px;color: #337ab7"><%=OrderInformation.getOstatus()%></p>
             <% }%>

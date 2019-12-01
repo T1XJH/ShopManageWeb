@@ -139,6 +139,7 @@
        $.ajax({
            type:"get",
            url:"/OrderInformationweb?action=admindex",
+           dataType: "json",
            success : function(data) {
                $("#jtzj").html(data.jtzj);
                $("#jtddl").html(data.jtddl);
