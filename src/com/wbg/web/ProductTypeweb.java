@@ -19,6 +19,12 @@ public class ProductTypeweb extends HttpServlet {
             case "insert":
                 response.getWriter().print(productTypeservice.insert(request));
                 break;
+            case "update":
+                response.getWriter().print(productTypeservice.update(request));
+                break;
+            case "delete":
+                response.getWriter().print(productTypeservice.delete(request));
+                break;
         }
     }
 

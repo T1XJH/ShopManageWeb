@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ProductTypeservice {
-    static ProductTypeDao productTypeDao=new ProductTypeDao();
-    static R r=new R();
+    static ProductTypeDao productTypeDao = new ProductTypeDao();
+    static R r = new R();
     public static String finAllGson(){
         return new Gson().toJson(productTypeDao.finAll());
     }
@@ -23,21 +23,50 @@ public class ProductTypeservice {
         r.setData(productTypeDao.finAlljson(page,limit));
         return DBUtil.toJson(r);
     }
+
     public static String finjson(int tid){
             r.setCount(1);
             r.setData(productTypeDao.finAll(tid));
             return DBUtil.toJson(r);
     }
+
     public static  String updatestatus(int tid,String status){
         if(productTypeDao.updatestatus(tid,status))
             r.setMsg("修改成功");
         else r.setMsg("修改失败");
         return DBUtil.toJson(r);
     }
+
     public static String insert(HttpServletRequest request){
         if(productTypeDao.insert(new ProductType(0,request.getParameter("tname"),request.getParameter("tstatus"))))
             r.setMsg("添加成功");
         else r.setMsg("添加失败");
+        return DBUtil.toJson(r);
+    }
+
+    public static String update(HttpServletRequest request){
+        R r=new R();
+        if(productTypeDao.update(productType(request)))
+            r.setMsg("修改成功");
+        else
+            r.setMsg("修改失败");
+        return DBUtil.toJson(r);
+    }
+
+    public static ProductType productType(HttpServletRequest request){
+        ProductType productType = new ProductType();
+        productType.setTid(Integer.parseInt(request.getParameter("tid")));
+        productType.setTname(request.getParameter("tname"));
+        productType.setTstatus(request.getParameter("tstatus"));
+        return productType;
+    }
+
+    public static String delete(HttpServletRequest request){
+        R r=new R();
+        if(productTypeDao.delete(new ProductType(Integer.parseInt(request.getParameter("tid")))))
+            r.setMsg("删除成功");
+        else
+            r.setMsg("删除失败");
         return DBUtil.toJson(r);
     }
 }
