@@ -1,6 +1,5 @@
 package	 com.wbg.Util;
 import java.io.IOException;
-import java.io.InputStream;
 import java.security.MessageDigest;
 import java.sql.*;
 import java.text.ParsePosition;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,9 +40,9 @@ public class DBUtil {
     //关闭连接
     public static void close(Connection conn) {
         try {
-            if(stmt!=null)
+            if(stmt != null)
                 stmt.close();
-            if(conn!=null && !conn.isClosed())
+            if(conn != null && !conn.isClosed())
                 conn.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

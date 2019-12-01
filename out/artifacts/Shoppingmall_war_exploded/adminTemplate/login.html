@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login</title>
+  <title>电子商城管理系统后台登录</title>
   <link rel="stylesheet" href="plugins/layui/css/layui.css">
   <link rel="stylesheet" href="src/css/login.css">
 </head>
@@ -14,7 +14,6 @@
   <div class="kit-login">
     <div class="kit-login-bg"></div>
     <div class="kit-login-wapper">
-      <h2 class="kit-login-slogan">小邦哥购物商城</h2>
       <div class="kit-login-form">
         <h4 class="kit-login-title">登录</h4>
         <form class="layui-form">
@@ -66,7 +65,7 @@
       form.on('submit(login_hash)', function(data) {
           $.get("/adminsweb?action=pwd",{aname:$("#aname").val(),apwd:$("#apwd").val()},function (data) {
                   if(data.msg=="ok"){
-                      location.href='/admin';
+                      location.href='/adminTemplate/index.html';
                   }else {
                       alert("账号密码有误!")
                   }

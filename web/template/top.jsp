@@ -1,16 +1,10 @@
-<%@ page import="com.wbg.entity.Users" %><%--
-  Created by IntelliJ IDEA.
-  User: 邦杠
-  Date: 2018/8/29
-  Time: 10:14
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.wbg.entity.Users" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row box" style="margin-top: 2rem; margin-bottom: 2rem;">
     <div class="col-md-3 column">
         <!-- 修改bootstrap中h1的margin-->
-        <h1 style="color: red; margin: auto;">挖宝网</h1>
+        <h1 style="color: red; margin: auto;">Hello World!</h1>
     </div>
     <div class="col-md-6 column">
         <form role="form" class="form-inline" >

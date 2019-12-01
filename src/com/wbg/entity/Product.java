@@ -1,8 +1,9 @@
 package com.wbg.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Product {
+public class Product implements Serializable {
     String pid;
     String pname;
     int ptid;

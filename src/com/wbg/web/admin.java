@@ -11,6 +11,6 @@ import java.io.IOException;
 public class admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.sendRedirect("/adminTemplate/index.html");
+        response.sendRedirect("/adminTemplate/login.html");
     }
 }
