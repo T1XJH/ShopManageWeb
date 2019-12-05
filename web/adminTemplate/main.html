@@ -141,14 +141,15 @@
            url:"/OrderInformationweb?action=admindex",
            dataType: "json",
            success : function(data) {
-               $("#jtzj").html(data.jtzj);
-               $("#jtddl").html(data.jtddl);
-               $("#jtfkl").html(data.jtfkl);
-               $("#jtwfkl").html(data.jtwfkl);
-               $("#ztddl").html(data.ztddl);
-               $("#ztfkl").html(data.ztfkl);
-               $("#ztwfkl").html(data.ztwfkl);
-               $("#ztzj").html(data.ztzj);
+               console.log("666")
+               $("#jtzj").html(data.data.jtzj);
+               $("#jtddl").html(data.data.jtddl);
+               $("#jtfkl").html(data.data.jtfkl);
+               $("#jtwfkl").html(data.data.jtwfkl);
+               $("#ztddl").html(data.data.ztddl);
+               $("#ztfkl").html(data.data.ztfkl);
+               $("#ztwfkl").html(data.data.ztwfkl);
+               $("#ztzj").html(data.data.ztzj);
            }
        })
 </script>
