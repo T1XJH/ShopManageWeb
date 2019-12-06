@@ -132,9 +132,9 @@ public class AdminsDao implements AdminsInterface {
     //添加
     @Override
     public boolean insert(Admins admins) {
-        String sql="insert into admins(alname,alpwd,astatus,aname)values(?,?,?,?)";
-        Object[]in={admins.getAlname(),admins.getAlpwd(),admins.getAstatus(),admins.getAname()};
-        if(DBUtil.executeUpdate(sql,in)>0)
+        String sql = "insert into admins(alname,alpwd,astatus,aname)values(?,?,?,?)";
+        Object[] in = {admins.getAlname(),admins.getAlpwd(),admins.getAstatus(),admins.getAname()};
+        if(DBUtil.executeUpdate(sql,in) > 0)
             return true;
         return false;
     }
@@ -143,8 +143,8 @@ public class AdminsDao implements AdminsInterface {
      */
     @Override
     public boolean update(Admins admins) {
-        String sql="update admins set alname=? ,alpwd=? ,astatus=? ,aname=? where aid=?";
-        Object[]in={admins.getAlname(),admins.getAlpwd(),admins.getAstatus(),admins.getAname(),admins.getAid()};
+        String sql="update admins set alname=? ,alpwd=? ,aname=? where aid=?";
+        Object[]in={admins.getAlname(), admins.getAlpwd(), admins.getAname(), admins.getAid()};
         if(DBUtil.executeUpdate(sql,in)>0)
             return true;
         return false;
@@ -199,8 +199,8 @@ public class AdminsDao implements AdminsInterface {
     @Override
     public boolean delete(Admins admins) {
         String sql="delete from admins where aid=?";
-        Object[]in={admins.getAid()};
-        if(DBUtil.executeUpdate(sql,in)>0)
+        Object[] in = {admins.getAid()};
+        if(DBUtil.executeUpdate(sql,in) > 0)
             return true;
         return false;
     }

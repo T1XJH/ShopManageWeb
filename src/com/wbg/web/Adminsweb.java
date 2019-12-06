@@ -9,7 +9,18 @@ import java.io.IOException;
 public class Adminsweb extends javax.servlet.http.HttpServlet {
     static Adminsservice adminsservice=new Adminsservice();
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-
+        String action = request.getParameter("action");
+        switch (action) {
+            case "insert":
+                response.getWriter().print(Adminsservice.insert(request));
+                break;
+            case "update":
+                response.getWriter().print(Adminsservice.update(request));
+                break;
+            case "delete":
+                response.getWriter().print(Adminsservice.delete(request));
+                break;
+        }
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {

@@ -38,6 +38,7 @@
             <button class="layui-btn layui-btns layui-btn-normal" id="selectpid" data-type="getCheckData" >查询</button>
         </div>
         <button class="layui-btn layui-btns layui-btn-normal" id="selectAll" data-type="getCheckData" >全部查询</button>
+        <button  class="layui-btn layui-btns layui-btn-normal" style="float: right;" id="insert">添加管理员</button>
     </div>
 </div>
 <table id="demo" lay-filter="demo"  ></table>
@@ -60,7 +61,62 @@
             table.on('tool(demo)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'detail') {
+                    layer.alert('查看详细信息：<br>' + JSON.stringify(data))
+                } else if (obj.event === 'del'){
+                    layer.confirm('正在删除管理员账号，请确认删除！', function(index){
+                        $.post("/adminsweb?action=delete",{aid: data.aid},function (data) {
+                            if (data.msg == "删除成功") {
+                                //执行重载
+                                table.reload('idsw', {
+                                    page: {
+                                        curr: 1 //重新从第 1 页开始
+                                    }
+                                });
+                            }
+                            layer.msg(data.msg);
+                            layer.close(index);
+                        }, "json")
 
+                    });
+                } else if (obj.event === 'edit') {
+                    $("#aids").val(data.aid);
+                    $("#aNames").val(data.aname);
+                    $("#aLNames").val(data.alname);
+                    $("#aLPwds").val(data.alpwd);
+                    form.render();
+                    layer.open({
+                        type:1
+                        ,content:$("#form")
+                        ,area:['850px','500px']
+                        ,btn: ['修改', '取消'] //只是为了演示
+                        ,yes: function(){
+                            var aid = $("#aids").val();
+                            var alname = $("#aLNames").val();
+                            var aname = $("#aNames").val();
+                            var alpwd = $("#aLPwds").val();
+                            $.post("/adminsweb?action=update",{
+                                    aid: aid,
+                                    alname: alname,
+                                    aname: aname,
+                                    alpwd: alpwd}
+                                ,function(data){
+                                    if (data.msg == "修改成功") {
+                                        layer.closeAll();
+                                        //执行重载
+                                        table.reload('idsw', {
+                                            page: {
+                                                curr: 1 //重新从第 1 页开始
+                                            }
+                                        });
+                                    }
+                                    layer.msg(data.msg);
+                                }, "json")
+                        }
+                        ,btn2: function(){
+                            //关闭
+                            layer.closeAll();
+                        }
+                    });
                 }
                 else if (obj.event === 'shangjia') {
                     $.ajax({
@@ -126,7 +182,7 @@
                         , {field: 'alname', title: '姓名', align: 'center'}
                         , {field: 'aname', title: '账号', align: 'center'}
                         , {field: 'astatus', title: '状态', align: 'center', templet: '#sexTpl', sort: true}
-                        , {field: 'right', title: '操作', width: '118', align: 'center', toolbar: '#barDemo'}
+                        , {field: 'right', title: '操作', width: 'auto', align: 'center', toolbar: '#barDemo'}
                     ]]
                     , id: "idsw"
                 });
@@ -197,13 +253,85 @@
                 });
             })
         })
+        $("#insert").click(function(){
+            $("#aids").val('');
+            $("#aNames").val('');
+            $("#aLNames").val('');
+            $("#aLPwds").val('');
+            layer.open({
+                type:1
+                ,content:$("#form")
+                ,area:['550px','300px']
+                ,btn: ['添加', '取消'] //只是为了演示
+                ,yes: function(){
+                    var alname = $("#aLNames").val();
+                    var aname = $("#aNames").val();
+                    var alpwd = $("#aLPwds").val();
+                    $.ajax({
+                        type:"post",
+                        url:"/adminsweb?action=insert",
+                        dataType: "json",
+                        data:{
+                            alname: alname,
+                            aname: aname,
+                            alpwd: alpwd
+                        }
+                        ,success:function(data){
+                            if (data.msg == "添加成功") {
+                                layer.closeAll();
+                                //执行重载
+                                table.reload('idsw', {
+                                    page: {
+                                        curr: 1 //重新从第 1 页开始
+                                    }
+                                });
+                            }
+                            layer.msg(data.msg);
+                        }
+                    });
+                }
+                ,btn2: function(){
+                    //关闭
+                    layer.closeAll();
+                    empty();
+                }
+            });
+        });
     })
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详细</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn  layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+
+<form class="layui-form" id="form" hidden="hidden">
+    <div class="layui-form-item" hidden="hidden">
+        <label class="layui-form-label">管理员编号</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" id="aids" readonly maxlength="13" onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');" autocomplete="off" placeholder="管理员编号" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" id="aNames" lay-verify="required" autocomplete="off" placeholder="请填写账号" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" id="aLPwds" lay-verify="required" autocomplete="off" placeholder="请填写密码" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" id="aLNames" lay-verify="required" autocomplete="off" placeholder="请填写姓名" class="layui-input">
+        </div>
+    </div>
+</form>
 </body>
 
 </html>
