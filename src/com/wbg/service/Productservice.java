@@ -44,15 +44,15 @@ public class Productservice {
         return DBUtil.toJson(r);
     }
     public static String insert(HttpServletRequest request){
-        R r=new R();
+        R r = new R();
         if(productDao.insert(product(request)))
-        r.setMsg("添加成功");
+            r.setMsg("添加成功");
         else
-         r.setMsg("添加失败");
+            r.setMsg("添加失败");
         return DBUtil.toJson(r);
     }
     public static String delete(HttpServletRequest request){
-        R r=new R();
+        R r = new R();
         if(productDao.delete(new Product(request.getParameter("pid"))))
             r.setMsg("删除成功");
         else

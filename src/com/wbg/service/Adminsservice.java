@@ -58,5 +58,39 @@ public class Adminsservice {
         }
         return DBUtil.toJson(r);
     }
+    public static String insert(HttpServletRequest request){
+        R r = new R();
+        if(adminsDao.insert(admin(request)))
+            r.setMsg("添加成功");
+        else
+            r.setMsg("添加失败");
+        return DBUtil.toJson(r);
+    }
+    public static String update(HttpServletRequest request){
+        R r = new R();
+        if(adminsDao.update(admin(request)))
+            r.setMsg("修改成功");
+        else
+            r.setMsg("修改失败");
+        return DBUtil.toJson(r);
+    }
+    public static Admins admin(HttpServletRequest request){
+        Admins admin = new Admins();
+        if (request.getParameter("aid") != null)
+            admin.setAid(Integer.parseInt(request.getParameter("aid")));
+        admin.setAname(request.getParameter("aname"));
+        admin.setAlname(request.getParameter("alname"));
+        admin.setAlpwd(request.getParameter("alpwd"));
+        admin.setAstatus("可用");
+        return admin;
+    }
+    public static String delete(HttpServletRequest request){
+        R r = new R();
+        if(adminsDao.delete(new Admins(Integer.parseInt(request.getParameter("aid")))))
+            r.setMsg("删除成功");
+        else
+            r.setMsg("删除失败");
+        return DBUtil.toJson(r);
+    }
 
 }
