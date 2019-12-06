@@ -22,6 +22,12 @@ public class Usersweb extends HttpServlet {
             case "password":
                 usersservice.password(request,response);
                 break;
+            case "update":
+                response.getWriter().print(Usersservice.update(request));
+                break;
+            case "delete":
+                response.getWriter().print(Usersservice.delete(request));
+                break;
             case "hqzh":
                 //判断用户是否登录过
                 Users user=(Users)request.getSession().getAttribute("user");

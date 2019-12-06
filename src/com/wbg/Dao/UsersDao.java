@@ -252,9 +252,9 @@ public class UsersDao implements UsersIntface {
      */
     @Override
     public boolean update(Users users) {
-        String sql="update Users set uLName=?,uLPwd=?,uEmail=?,uName=?,uTel=?,ustatus=? where uid=?";
-        Object[]in={users.getuLName(),users.getuLPwd(),users.getuEmail(),users.getuName(),users.getuTel(),users.getUstatus(),users.getUid()};
-        if(DBUtil.executeUpdate(sql,in)>0)
+        String sql = "update Users set uLName=?,uEmail=?,uName=?,uTel=? where uid=?";
+        Object[] in = {users.getuLName(), users.getuEmail(), users.getuName(), users.getuTel(), users.getUid()};
+        if(DBUtil.executeUpdate(sql,in) > 0)
             return true;
         return false;
     }
@@ -267,8 +267,8 @@ public class UsersDao implements UsersIntface {
     @Override
     public boolean delete(Users users) {
         String sql="delete from Users where uid=?";
-        Object[]in={users.getUid()};
-        if(DBUtil.executeUpdate(sql,in)>0)
+        Object[] in = {users.getUid()};
+        if(DBUtil.executeUpdate(sql,in) > 0)
             return true;
         return false;
     }

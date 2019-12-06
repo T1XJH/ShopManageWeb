@@ -143,8 +143,8 @@
             //监听工具条
             table.on('tool(demo)', function(obj){
                 var data = obj.data;
-                if(obj.event === 'detail'){
-                    layer.confirm('真的删除行么', function(index){
+                if(obj.event === 'del'){
+                    layer.confirm('确认删除？', function(index){
                         $.post("/Productweb?action=delete",{pid:data.pid},function (data) {
                             if (data.msg == "删除成功") {
                                 //执行重载
@@ -161,13 +161,13 @@
                     });
                 }  else if(obj.event === 'edit'){
                     console.log(data)
-                  $("#pids").val(data.pid);
-                  $("#pnames").val(data.pname);
-                  $("#ptids").val(data.ptid);
-                  $("#pprices").val(data.pprice);
-                  data.pstatus=="上架中"?$("#pstatuss").prop("checked",true):$("#nopstatus").prop("checked",true);
-                   $("#pnumbers").val(data.pnumber);
-                   $("#demo1").prop("src","/"+data.pimg);
+                    $("#pids").val(data.pid);
+                    $("#pnames").val(data.pname);
+                    $("#ptids").val(data.ptid);
+                    $("#pprices").val(data.pprice);
+                    data.pstatus=="上架中"?$("#pstatuss").prop("checked",true):$("#nopstatus").prop("checked",true);
+                    $("#pnumbers").val(data.pnumber);
+                    $("#demo1").prop("src","/"+data.pimg);
                     pimg=data.pimg
                     form.render();
                     layer.open({
@@ -360,7 +360,7 @@
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn  layui-btn-danger layui-btn-xs" lay-event="detail">删除</a>
+    <a class="layui-btn  layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 </body>
