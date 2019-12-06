@@ -83,6 +83,31 @@ public class Usersservice {
         else r.setMsg("修改失败");
         return DBUtil.toJson(r);
     }
+    public static String delete(HttpServletRequest request){
+        R r=new R();
+        if(usersDao.delete(new Users(Integer.parseInt(request.getParameter("uid")))))
+            r.setMsg("删除成功");
+        else
+            r.setMsg("删除失败");
+        return DBUtil.toJson(r);
+    }
+    public static String update(HttpServletRequest request){
+        R r = new R();
+        if(usersDao.update(user(request)))
+            r.setMsg("修改成功");
+        else
+            r.setMsg("修改失败");
+        return DBUtil.toJson(r);
+    }
+    public static Users user(HttpServletRequest request){
+        Users user = new Users();
+        user.setUid(Integer.parseInt(request.getParameter("uid")));
+        user.setuLName(request.getParameter("ulname"));
+        user.setuName(request.getParameter("uname"));
+        user.setuEmail(request.getParameter("uemail"));
+        user.setuTel(request.getParameter("utel"));
+        return user;
+    }
 
     public static void main(String[] args) {
         System.out.println(finall());
