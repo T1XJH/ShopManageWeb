@@ -37,7 +37,7 @@
     <div class="row well well-sm box">
         <div class="col-md-2 column" align="left">
             <input type="checkbox" class="check" value="<%=shoppingCart.getSid()%>" />
-            <img alt="120x120" width="120rem" height="120rem" src="https://g-search2.alicdn.com/img/bao/uploaded/i4/i1/263726286/TB2qqpCu2iSBuNkSnhJXXbDcpXa_!!263726286-0-item_pic.jpg_460x460Q90.jpg_.webp" />
+            <img alt="120x120" width="120rem" height="120rem" src="/<%=shoppingCart.getPimg()%>" />
         </div>
         <div class="col-md-3 column" align="left">
             <p>

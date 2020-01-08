@@ -35,7 +35,7 @@
     <div class="row well well-sm box">
         <div class="col-md-2 column" style="text-align: center" align="left">
             <p style="font-size: 12px;"><%= OrderInformation.getOtime() %></p>
-            <img alt="80x80" width="60rem" height="50rem" src="https://g-search2.alicdn.com/img/bao/uploaded/i4/i1/263726286/TB2qqpCu2iSBuNkSnhJXXbDcpXa_!!263726286-0-item_pic.jpg_460x460Q90.jpg_.webp" />
+            <img alt="80x80" width="60rem" height="50rem" src="/<%=OrderInformation.getPimg()%>" />
         </div>
         <div class="col-md-3 column" align="left">
             <p>
